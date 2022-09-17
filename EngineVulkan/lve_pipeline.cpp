@@ -23,7 +23,7 @@ namespace lve {
 		return buffer;
 	}
 
-	void LvePipeline::createGraphicsPipeline(const std::string& vertFilepath, const std::string& fragFilepath) {
+	void LvePipeline::createGraphicsPipeline(const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo) {
 		auto vertCode = readFile(vertFilepath);
 		auto fragCode = readFile(fragFilepath);
 
@@ -31,7 +31,11 @@ namespace lve {
 		std::cout << "fragment shader code size: " << fragCode.size() << '\n';
 	}
 
-	LvePipeline::LvePipeline(const std::string& vertFilepath, const std::string& fragFilepath) {
+	LvePipeline::LvePipeline(
+		LveDevice& device,
+		const std::string& vertFilepath,
+		const std::string& fragFilepath,
+		const PipelineConfigInfo& configInfo) : lveDevice{ device } {
 		createGraphicsPipeline(vertFilepath, fragFilepath);
 	}
 }
